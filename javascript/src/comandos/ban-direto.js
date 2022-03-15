@@ -5,7 +5,7 @@
 //Contribuidor JosueHTML
 
 module.exports.run = (client, message) => {
-   const memberId = message.content.split(/ +/)[0] || message.mentions.users.first(); // Se tiver o id na mensagem vai ser se não vai ser a menção
+   const memberId = message.content.split(/ +/)[0] || message.mentions.members.first(); // Se tiver o id na mensagem vai ser se não vai ser a menção
    const { guild } = message;
   //Banindo
   guilds.members.cache.get(memberId).ban({
