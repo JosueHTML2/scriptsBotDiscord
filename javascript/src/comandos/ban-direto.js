@@ -5,13 +5,12 @@
 //Contribuidor JosueHTML
 
 module.exports.run = (client, message) => {
-   const memberId = message.content.split(/ +/)[1] ?  message.content.split(/ +/)[1] : message.mentions.members.first(); // Se tiver o id na mensagem vai ser se não vai ser a menção
-   const { guild } = message;
-  //Banindo
-  guilds.members.cache.get(memberId).ban({
-    days: 3,
-    reason: message.content.split(/ +/)[1] 
-  });
-  
-  
+   let reason = message.content.split(/ +/)[2],
+   member = message.mentions.members.first(); // Pegando o membro pela menções.
+   
+   if (!member || !reason) 
+      return message.channel.send("Você usou o comando de uma forma errada, use assim: !ban <@nomeDoUsuario> <razão> (Ignore os < e os >)") //Verificando se a mensagem tem um user ou uma razão.
+   
+   message.channel.send(`${member.displayName()}, Foi banido com sucesso com a razão ${reason}`); //Mandando mensagem no canal que o comando foi usado.
+   member.ban({ reason }); //Banindo o membro mencionado.
 }
